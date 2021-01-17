@@ -12,8 +12,12 @@ type Mutation {
     image: String
     largeImage: String
   ): Item!
+  updateItem(id: ID!, title: String, description: String, price: Int): Item!
 }
+# image: String
+# largeImage: String # come back later to figure out how to add the upload flow to update item
 
 type Query {
   items: [Item]!
+  item(where: ItemWhereUniqueInput!): Item
 }

@@ -12,6 +12,24 @@ const Mutations = {
     console.log(item);
     return item;
   },
+  async updateItem(parent, args, ctx, info) {
+    //  first take a copy of updates
+    const updates = { ...args };
+    // remove id from the updates
+    delete updates.id;
+    // run update method
+    const item = await ctx.db.mutation.updateItem(
+      {
+        data: updates,
+        where: {
+          id: args.id,
+        },
+      },
+      info
+    );
+    console.log(item);
+    return item;
+  },
 };
 
 module.exports = Mutations;
