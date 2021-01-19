@@ -13,6 +13,7 @@ type Mutation {
     largeImage: String
   ): Item!
   updateItem(id: ID!, title: String, description: String, price: Int): Item!
+  deleteItem(id: ID!): Item!
 }
 # image: String
 # largeImage: String # come back later to figure out how to add the upload flow to update item
