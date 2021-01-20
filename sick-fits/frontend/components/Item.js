@@ -9,7 +9,7 @@ import DeleteItem from "./DeleteItem";
 
 export default class Item extends Component {
   static propTypes = {
-    items: PropTypes.object.isRequired,
+    item: PropTypes.object.isRequired,
   };
 
   render() {
