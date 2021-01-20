@@ -8,6 +8,10 @@
 #   permissions: [Permission!]!
 # }
 
+type SuccessMessage {
+  message: String
+}
+
 type Mutation {
   createItem(
     title: String
@@ -20,6 +24,7 @@ type Mutation {
   deleteItem(id: ID!): Item!
   signup(email: String!, password: String!, name: String!): User!
   signin(email: String!, password: String!): User!
+  signout: SuccessMessage
 }
 # image: String
 # largeImage: String # come back later to figure out how to add the upload flow to update item
