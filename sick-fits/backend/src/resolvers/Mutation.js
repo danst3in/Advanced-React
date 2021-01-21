@@ -14,7 +14,7 @@ const Mutations = {
       },
       info
     );
-    console.log(item);
+    // console.log(item);
     return item;
   },
   async updateItem(parent, args, ctx, info) {
@@ -32,7 +32,7 @@ const Mutations = {
       },
       info
     );
-    console.log(item);
+    // console.log(item);
     return item;
   },
   async deleteItem(parent, args, ctx, info) {
@@ -112,9 +112,6 @@ const Mutations = {
       where: { email: args.email },
       data: { resetToken, resetTokenExpiry },
     });
-    console.log("🚀 ~ file: Mutation.js ~ line 115 ~ requestReset ~ res", res);
-
-    // ctx.response.clearCookie("token");
     //  email them the reset token
     return { message: "Goodbye!" };
   },
