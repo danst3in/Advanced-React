@@ -64,7 +64,7 @@ const Mutations = {
     args.email = args.email.toLowerCase();
     //  hash user passwords
     const password = await bcrypt.hash(args.password, 10);
-    // creat user in db and sign them in
+    // creat user in db and sign them in // edit permissions here to add an ADMIN since Prisma console doesn't allow
     const user = await ctx.db.mutation.createUser(
       {
         data: {
