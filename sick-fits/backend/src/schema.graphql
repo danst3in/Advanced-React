@@ -33,6 +33,7 @@ type Mutation {
   signout: SuccessMessage
   updatePermissions(permissions: [Permission], userId: ID!): User
   addToCart(id: ID!): CartItem
+  removeFromCart(id: ID!): CartItem
 }
 # image: String
 # largeImage: String # come back later to figure out how to add the upload flow to update item
