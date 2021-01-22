@@ -216,9 +216,9 @@ const Mutations = {
     }
     // Query the users current cart
     const [existingCartItem] = await ctx.db.query.cartItems({
-      userId: { id: userId },
-      item: { id: args.id },
+      where: { user: { id: userId }, item: { id: args.id } },
     });
+
     // check if item is already in the cart - increment or ...
     if (existingCartItem) {
       console.log("This item is already in their cart!");
@@ -231,6 +231,7 @@ const Mutations = {
       );
     }
     // add new item to cart
+    console.log("Adding new item to their cart!");
     return ctx.db.mutation.createCartItem(
       {
         data: {
