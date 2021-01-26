@@ -295,6 +295,7 @@ const Mutations = {
             id
             description
             image
+            largeImage
               }
               }
         }`
@@ -312,10 +313,34 @@ const Mutations = {
       source: args.token,
     });
     //  convert the cartItems to OrderItems
+    const orderItems = user.cart.map((cartItem) => {
+      const orderItem = {
+        ...cartItem.item,
+        quantity: cartItem.quantity,
+        user: { connect: { id: userId } },
+      };
+      delete orderItem.id;
+      return orderItem;
+    });
     //  create the Order
+    //  like "connect" prisma method, "create" has special functionality and
+    //  will take the array of orderItems from above and automatically create several items at once
+    const order = await ctx.db.mutation.createOrder({
+      data: {
+        total: charge.amount,
+        charge: charge.id,
+        items: { create: orderItems },
+        user: { connect: { id: userId } },
+      },
+    });
     //  clear the user's cart after purchase
     //  delete the cartItems from db
+    const cartItemIds = user.cart.map((cartItem) => cartItem.id);
+    await ctx.db.mutation.deleteManyCartItems({
+      where: { id_in: cartItemIds },
+    });
     //  return order to client
+    return order;
   },
 };
 

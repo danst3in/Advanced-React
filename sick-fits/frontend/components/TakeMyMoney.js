@@ -33,17 +33,18 @@ export default class TakeMyMoney extends Component {
   // static propTypes = {
   //   prop: PropTypes,
   // };
-  onToken = (res, createOrder) => {
+  onToken = async (res, createOrder) => {
     console.log("On Token Call");
     console.log("token res.id", res.id);
     //  manually call mutation once we have stripe token
-    createOrder({
+    const order = await createOrder({
       variables: {
         token: res.id,
       },
     }).catch((err) => {
       alert(err.message);
     });
+    console.log("order", order);
   };
 
   render() {
@@ -59,7 +60,9 @@ export default class TakeMyMoney extends Component {
                 amount={calcTotalPrice(me.cart)}
                 name="Sicks Fits"
                 description={`Order of ${totalItems(me.cart)} items.`}
-                image={me.cart[0].item && me.cart[0].item.image}
+                image={
+                  me.cart.length && me.cart[0].item && me.cart[0].item.image
+                }
                 stripeKey="pk_test_51IDhH4F9fGfPVE2oe5sTUZITtvo1ArKF2mDNulrX7bmOepBE6vVEiCU0BO0xt5bmaxHCW6PHAI4x806712szmjUM00apgzZMP0"
                 currency="USD"
                 email={me.email}
