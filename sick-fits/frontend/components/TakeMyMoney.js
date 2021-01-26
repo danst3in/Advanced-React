@@ -34,6 +34,7 @@ export default class TakeMyMoney extends Component {
   //   prop: PropTypes,
   // };
   onToken = async (res, createOrder) => {
+    NProgress.start();
     console.log("On Token Call");
     console.log("token res.id", res.id);
     //  manually call mutation once we have stripe token
@@ -44,7 +45,10 @@ export default class TakeMyMoney extends Component {
     }).catch((err) => {
       alert(err.message);
     });
-    console.log("order", order);
+    Router.push({
+      pathname: "/order",
+      query: { id: order.data.createOrder.id },
+    });
   };
 
   render() {
