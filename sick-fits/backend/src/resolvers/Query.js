@@ -54,6 +54,22 @@ const Query = {
     //  return the order
     return order;
   },
+  async orders(parent, args, ctx, info) {
+    // make sure they are logged in
+    const userId = ctx.request.userId;
+    if (!userId) {
+      throw new Error("You must be logged in!");
+    }
+    //  query current user's orders
+    const orders = await ctx.db.query.orders(
+      {
+        where: { user: { id: userId } },
+      },
+      info
+    );
+
+    return orders;
+  },
 
   // async items(parent, args, ctx, info) {
   //   const items = await ctx.db.query.items();

@@ -45,9 +45,7 @@ export default class Order extends Component {
           return (
             <OrderStyles>
               <Head>
-                <title>
-                  <p>Order ID: {this.props.id}</p>
-                </title>
+                <title>Order ID: {this.props.id}</title>
               </Head>
               <p>
                 <span>Order ID: </span>
