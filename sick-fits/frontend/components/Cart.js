@@ -10,6 +10,7 @@ import CloseButton from "./styles/CloseButton";
 import SickButton from "./styles/SickButton";
 import Supreme from "./styles/Supreme";
 import User from "./User";
+import TakeMyMoney from "./TakeMyMoney";
 
 export const LOCAL_STATE_QUERY = gql`
   query {
@@ -37,7 +38,7 @@ const Cart = () => (
       if (!me) {
         return null;
       }
-      console.log("me", me);
+      // console.log("me", me);
       return (
         <CartStyles open={localState.data.cartOpen}>
           <header>
@@ -57,7 +58,11 @@ const Cart = () => (
           </ul>
           <footer>
             <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-            <SickButton>Checkout</SickButton>
+            {me.cart.length && (
+              <TakeMyMoney>
+                <SickButton>Checkout</SickButton>
+              </TakeMyMoney>
+            )}
           </footer>
         </CartStyles>
       );
