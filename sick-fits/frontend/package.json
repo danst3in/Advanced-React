@@ -48,7 +48,6 @@
     "jest-transform-graphql": "^2.1.0"
   },
   "jest": {
-    "verbose": false,
     "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
     "testPathIgnorePatterns": [
       "<rootDir>/.next/",
