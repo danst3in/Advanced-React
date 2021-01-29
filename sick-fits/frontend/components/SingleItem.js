@@ -24,7 +24,7 @@ const SingleItemStyles = styled.div`
   }
 `;
 
-const SINGLE_ITEM_QUERY = gql`
+export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     item(where: { id: $id }) {
       id
@@ -49,7 +49,7 @@ export default class SingleItem extends Component {
             return <Error error={error} />;
           }
           if (loading) {
-            return loading;
+            return <p>Loading...</p>;
           }
           if (!data.item) {
             return <p>No item found for id: {this.props.id}</p>;
@@ -64,7 +64,7 @@ export default class SingleItem extends Component {
               <Head>
                 <title>Sick Fits | {item.title}</title>
               </Head>
-              <img src={item.largeImage} alt={item.title} srcset="" />
+              <img src={item.largeImage} alt={item.title} />
               <div className="details">
                 <h2>Viewing {item.title}</h2>
                 <p>{item.description}</p>
